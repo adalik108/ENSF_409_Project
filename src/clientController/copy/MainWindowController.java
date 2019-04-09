@@ -17,6 +17,7 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 
 	//@Override
 	//MainWindow theView;
+	private ArrayList<Tool> tools;
 	
 	public MainWindowController(MainWindow view, CommControl com) {
 		super(view, com);
@@ -78,12 +79,13 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 //			tools += "\n";
 //		}
 //		((MainWindow) theView).setDisplay(tools);
-		ArrayList<Tool> t = theCom.recieveObject();
-		Tool[] tools = new Tool[t.size()];
-		for(int i = 0; i < t.size(); i++) {
-			tools[i] = t.get(i);
+		tools = theCom.recieveObject();
+		String[] s = new String[tools.size()];
+		for(int i = 0; i < tools.size(); i++) {
+			s[i] = tools.get(i).toString();
+			System.out.println(s[i]);
 		}
-		((MainWindow) theView).setDisplay(tools);
+		((MainWindow) theView).setDisplay(s);
 	}
 	
 	public static void main(String[] args) {

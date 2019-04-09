@@ -35,7 +35,7 @@ public class MainWindow extends JFrame{
 	
 	//private JTextArea display = new JTextArea();
 	
-	private JList<Tool> display = new JList<Tool>();
+	private JList<String> display = new JList<String>();
 	
 	public MainWindow() {
 		
@@ -203,8 +203,8 @@ public class MainWindow extends JFrame{
 	 * Causes the given Tools to be displayed on the GUI
 	 * @param t the tools to be displayed
 	 */
-	public void setDisplay(Tool[] t) {
-		display.setListData(t);
+	public void setDisplay(String[] s) {
+		display.setListData(s);
 		
 	}
 	
