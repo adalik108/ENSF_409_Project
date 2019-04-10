@@ -1,4 +1,4 @@
-package clientController.copy;
+package clientController;
 
 /**
  * Interface that contains the integer values that correlate to the tasks the server can execute

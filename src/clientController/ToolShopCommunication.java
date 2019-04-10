@@ -1,4 +1,4 @@
-package clientController.copy;
+package clientController;
 
 /**
  * Interface which contains the constants that represent the characters used in the client-server communication protocol

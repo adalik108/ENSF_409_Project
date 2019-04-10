@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import clientController.copy.MainWindowController;
+import clientController.MainWindowController;
 import model.ToolModel;
 import view.MainWindow;
 

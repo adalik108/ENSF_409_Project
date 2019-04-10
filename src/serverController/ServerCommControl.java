@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import clientController.copy.ToolShopCommunication;
+import clientController.ToolShopCommunication;
 import model.Tool;
 
 /**

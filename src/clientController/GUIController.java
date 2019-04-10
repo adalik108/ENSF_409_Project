@@ -1,4 +1,4 @@
-package clientController.copy;
+package clientController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

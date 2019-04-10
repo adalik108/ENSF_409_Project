@@ -228,6 +228,10 @@ public class MainWindow extends JFrame{
 		addWindow.setVisible(b);
 	}
 	
+	public int getSelectedIndex() {
+		return display.getSelectedIndex();
+	}
+	
 	public static void main(String[] args) {
 		MainWindow theWindow = new MainWindow();
 		theWindow.setVisible(true);
