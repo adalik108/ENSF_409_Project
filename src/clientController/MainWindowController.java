@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import clientModel.ClientData;
 import model.Tool;
 import view.MainWindow;
 
@@ -17,10 +18,11 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 
 	//@Override
 	//MainWindow theView;
-	private ArrayList<Tool> tools;
+	private  ClientData theData;
 	
-	public MainWindowController(MainWindow view, CommControl com) {
+	public MainWindowController(MainWindow view, CommControl com, ClientData data) {
 		super(view, com);
+		theData = data;
 		
 		view.addSearchListener(new Button1Listener());
 		view.addAddListener(new Button2Listener());
@@ -63,7 +65,7 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 	private void allTools() {
 		theCom.sendToServer(ALL);
 		
-		setTools();
+		theData.setTools(theCom.recieveObject());
 		
 		displayFullInfo();
 	}
@@ -73,46 +75,19 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 		String toServer = "";
 		toServer += ((MainWindow) theView).getSearchInput();
 		theCom.sendToServer(toServer);
-		setTools();
+		theData.setTools(theCom.recieveObject());
 		displayFullInfo();
 	}
 	
-	private String[] fullInfoString(ArrayList<Tool> t) {
-		String[] s = new String[t.size()];
-		for(int i = 0; i < t.size(); i++) {
-			try {
-				s[i] = tools.get(i).toString();
-			}catch(NullPointerException e) {
-				s[i] = searchError(i);
-			}
-		}
-		System.out.println(tools.size());
-		return s;
-	}
-	
-	private String searchError(int i) {
-		String s = "";
-		if(i == 0) {
-			s += ("Tool: " + ((MainWindow) theView).getNameInput() + "could not be found");
-		}
-		else {
-			s += ("Tool: " + ((MainWindow) theView).getIdInput() + "could not be found");
-		}
-		return s;
-	}
-	
-	private void setTools() {
-		tools = theCom.recieveObject();
-	}
-	
 	private void displayFullInfo() {
-		((MainWindow) theView).setDisplay(fullInfoString(tools));
+		((MainWindow) theView).setDisplay(theData.fullInfoString());
 	}
 	
 	public static void main(String[] args) {
 		MainWindow theWindow = new MainWindow();
 		CommControl theCom = new CommControl("localhost", 8099);
-		MainWindowController control = new MainWindowController(theWindow, theCom);
+		ClientData theData = new ClientData();
+		MainWindowController control = new MainWindowController(theWindow, theCom, theData);
 		AddWindowController addControl = new AddWindowController(theWindow.getAddWindow(), theCom);
 //		theCom.sendToServer("sent this to the server");
 //		theCom.sendToServer("sent this to the server");

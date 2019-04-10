@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import clientModel.ClientData;
+
 public class GUIController {
 
 	protected JFrame theView;

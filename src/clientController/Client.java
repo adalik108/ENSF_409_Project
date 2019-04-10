@@ -1,5 +1,6 @@
 package clientController;
 
+import clientModel.ClientData;
 import view.MainWindow;
 
 /**
@@ -12,7 +13,8 @@ public class Client {
 	public void runClient() {
 		MainWindow theWindow = new MainWindow();
 		CommControl theCom = new CommControl("localhost", 8099);
-		MainWindowController control = new MainWindowController(theWindow, theCom);
+		ClientData theData = new ClientData();
+		MainWindowController control = new MainWindowController(theWindow, theCom, theData);
 		AddWindowController addControl = new AddWindowController(theWindow.getAddWindow(), theCom);
 //		theCom.sendToServer("sent this to the server");
 //		theCom.sendToServer("sent this to the server");
