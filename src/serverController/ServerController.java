@@ -43,6 +43,10 @@ public class ServerController implements ToolShopTasks{
 		theModel.change(theCom.recieveObject());
 	}
 	
+	private void add() {
+		theModel.addToolFromString(theCom.receiveFromClient());
+	}
+	
 	/**
 	 * Controls which operation is performed by the server
 	 */
@@ -66,6 +70,10 @@ public class ServerController implements ToolShopTasks{
 						
 					case CHANGE:
 						change();
+						break;
+						
+					case ADD:
+						add();
 						break;
 				}
 			}

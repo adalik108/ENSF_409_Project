@@ -120,6 +120,10 @@ public class AddWindow extends JFrame{
 		return idInput.getText();
 	}
 	
+	public String getInput() {
+		return (idInput.getText() + ";" + nameInput.getText() + ";" + quantInput.getText() + ";" + priceInput.getText() + ";" + supInput.getText());
+	}
+	
 	
 	public static void main(String[] args) {
 		AddWindow theWindow = new AddWindow();

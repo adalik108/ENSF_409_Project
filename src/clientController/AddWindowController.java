@@ -3,6 +3,7 @@ package clientController;
 import javax.swing.JFrame;
 
 import view.AddWindow;
+import view.MainWindow;
 
 /**
  * The controller for the Add Window of the GUI
@@ -10,7 +11,7 @@ import view.AddWindow;
  *
  */
 
-public class AddWindowController extends GUIController{
+public class AddWindowController extends GUIController implements ToolShopTasks{
 
 	public AddWindowController(AddWindow view, CommControl com) {
 		super(view, com);
@@ -18,6 +19,15 @@ public class AddWindowController extends GUIController{
 		view.addAddListener(new Button1Listener());
 		view.addCancelListener(new Button2Listener());
 		
+	}
+	
+	@Override
+	public void button1() {
+		theCom.sendToServer(ADD);
+		String toServer = "";
+		toServer += ((AddWindow) theView).getInput();
+		theCom.sendToServer(toServer);
+		theView.setVisible(false);
 	}
 	
 	@Override
