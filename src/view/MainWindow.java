@@ -195,6 +195,10 @@ public class MainWindow extends JFrame{
 		return idInput.getText();
 	}
 	
+	public String getSearchInput() {
+		return (nameInput.getText() + "\n" + idInput.getText());
+	}
+	
 //	public void setDisplay(String s) {
 //		display.setText(s);
 //	}

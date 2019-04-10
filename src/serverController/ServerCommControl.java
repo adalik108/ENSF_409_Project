@@ -59,15 +59,16 @@ public class ServerCommControl implements ToolShopCommunication {
 	 */
 	public int receiveTask() {
 		try {
-			String s = "";
+			int a;
 			InputStream inputStream = theSocket.getInputStream();
 			ObjectInputStream objectIn = new ObjectInputStream(inputStream);
 			
 //			s = (String) objectIn.readObject();
 			//objectIn.close();
 			
-			//return Integer.parseInt(s);
-			return (int) objectIn.readObject();
+			a = (int) objectIn.readObject();
+			System.out.println("Task received: " + a);
+			return a;
 			//s = (String) obje
 //			int a = Integer.parseInt(socketIn.readLine());
 //			return a;
@@ -121,6 +122,8 @@ public class ServerCommControl implements ToolShopCommunication {
 			OutputStream outputStream = theSocket.getOutputStream();
 			ObjectOutputStream objectOut = new ObjectOutputStream(outputStream);
 			objectOut.writeObject(t);
+//			System.out.println("Tools sent to client: ");
+//			printTools(t);
 			t = new ArrayList<Tool>();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -174,7 +177,7 @@ public class ServerCommControl implements ToolShopCommunication {
 			
 			s = (String) objectIn.readObject();
 			//objectIn.close();
-			
+			System.out.println("received: " + s);
 			return s;
 			//s = (String) obje
 //			int a = Integer.parseInt(socketIn.readLine());
@@ -192,5 +195,10 @@ public class ServerCommControl implements ToolShopCommunication {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	void printTools(ArrayList<Tool> t) {
+		for(Tool to: t) 
+			System.out.println(to.toString());
 	}
 }

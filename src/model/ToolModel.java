@@ -98,7 +98,7 @@ public class ToolModel {
 	 */
 	public Tool searchTool(String name) {
 		for(Tool t : inventory) {
-			if(t.getName().equals(name))
+			if(t.getName().toLowerCase().equals(name.toLowerCase()));
 				return t;
 		}
 		return null;
@@ -316,8 +316,10 @@ public class ToolModel {
 	public ArrayList<Tool> search(String input){
 		ArrayList<Tool> tools = new ArrayList<Tool>();
 		String[] arr = splitString(input);
-		//if(!arr[0].equals(anObject))
-		
+		if(!arr[0].equals(""))
+			tools.add(searchTool(arr[0]));
+		if(!arr[1].equals(""))
+			tools.add(searchTool(Integer.parseInt(arr[1])));
 		return tools;
 	}
 	

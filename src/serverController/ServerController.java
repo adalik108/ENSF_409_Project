@@ -39,8 +39,7 @@ public class ServerController implements ToolShopTasks{
 	 * Sends the searched for tool(s) to client
 	 */
 	private void search() {
-		String input = theCom.receiveFromClient();
-		
+		theCom.sendObject(theModel.search(theCom.receiveFromClient()));
 	}
 	
 	/**
@@ -54,14 +53,28 @@ public class ServerController implements ToolShopTasks{
 				
 					case SEARCH:
 						search();
+						break;
 						
 					case ALL:
 						allTools();
+						break;
 				}
 			}
 		}catch(Exception e) {
 			theCom.close();
 		}
+	}
+	
+	String[] parseSearch(String s) {
+		String [] s1 = {"", ""};
+		
+		for(int i = 0, j = 0; i < s.length(); i++) {
+			if(s.charAt(i) != '\n')
+				s1[j] += s.charAt(i);
+			else
+				j++;
+		}
+		return s1;
 	}
 	
 	public static void main(String[] args) {

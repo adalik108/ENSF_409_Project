@@ -48,10 +48,12 @@ public class CommControl implements ToolShopCommunication{
 //		socketOut.println(s);
 //		return;
 		try {
+			System.out.println("Sending: " + s);
 			OutputStream outputStream = theSocket.getOutputStream();
 			ObjectOutputStream objectOut = new ObjectOutputStream(outputStream);
 			objectOut.writeObject(s);
 			s = new String();
+			
 			//outputStream.close();
 			//objectOut.close();
 		} catch (IOException e) {
