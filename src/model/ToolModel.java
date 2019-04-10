@@ -82,9 +82,10 @@ public class ToolModel {
 	 * @return True if the Tool was removed, false otherwise
 	 */
 	public boolean removeTool(Tool t) {
-		for(Tool tool : inventory) {
-			if(tool.getName() == t.getName()) {
-				inventory.remove(t);
+		System.out.println("in remove");
+		for(int i = 0; i < inventory.size(); i++) {
+			if(t.getName().equals(inventory.get(i).getName())) {
+				inventory.remove(i);
 				return true;
 			}
 		}
@@ -98,7 +99,7 @@ public class ToolModel {
 	 */
 	public Tool searchTool(String name) {
 		for(Tool t : inventory) {
-			if(t.getName().toLowerCase().equals(name.toLowerCase()));
+			if(t.getName().toLowerCase().equals(name.toLowerCase()))
 				return t;
 		}
 		return null;
@@ -151,17 +152,17 @@ public class ToolModel {
 	 * @param numSold Number to reduce the quantity of the given Tool by
 	 * @return true if the sale is valid (i.e. enough in stock), false otherwise
 	 */
-//	public boolean sellTool(String name, int numSold) {
-//		Tool t = searchTool(name);
-//		if(validSale(t, numSold)) {
-//			t.setQuant(t.getQuant() - numSold);
+	public boolean sellTool(String name, int numSold) {
+		Tool t = searchTool(name);
+		if(validSale(t, numSold)) {
+			t.setQuant(t.getQuant() - numSold);
 //			if(t.getQuant() < MIN_QUANT) {
 //				newOrderLine(t);
 //			}
-//			return true;
-//		}
-//		return false;
-//	}
+			return true;
+		}
+		return false;
+	}
 	
 	/**
 	 * Reduces the quantity of the specified Tool by the given amount.
@@ -343,6 +344,18 @@ public class ToolModel {
 		arr[0] = s1;
 		arr[1] = s2;
 		return arr;
+	}
+	
+	public void change(Tool t) {
+		System.out.println("Quantity is: " + t.getQuant());
+		Tool tool = searchTool(t.getName());
+		if(tool != null) {
+			int numSold = tool.getQuant() - t.getQuant();
+			if(numSold > 0) {
+				sellTool(t.getName(), numSold);
+			}
+		}
+		
 	}
 }
 

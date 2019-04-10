@@ -229,7 +229,13 @@ public class MainWindow extends JFrame{
 	}
 	
 	public int getSelectedIndex() {
+		//int a = display.getSelectedIndex();
 		return display.getSelectedIndex();
+		//return a;
+	}
+	
+	public int getChangeInput() {
+		return Integer.parseInt(changeInput.getText());
 	}
 	
 	public static void main(String[] args) {

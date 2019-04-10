@@ -52,6 +52,17 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 		//theView.setAddVisible(true);
 	}
 	
+	@Override
+	//Remove
+	public void button3() {
+		remove();
+	}
+	
+	@Override
+	//Change
+	public void button4() {
+		change();
+	}
 	
 	/**
 	 * Initiates the All Tool function
@@ -62,10 +73,15 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 		allTools();
 	}
 	
+	@Override
+	public void button6() {
+		quant();
+	}
+	
 	private void allTools() {
 		theCom.sendToServer(ALL);
 		
-		theData.setTools(theCom.recieveObject());
+		setTools();
 		
 		displayFullInfo();
 	}
@@ -75,12 +91,36 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 		String toServer = "";
 		toServer += ((MainWindow) theView).getSearchInput();
 		theCom.sendToServer(toServer);
-		theData.setTools(theCom.recieveObject());
+		setTools();
 		displayFullInfo();
+	}
+	
+	private void remove() {
+		theCom.sendToServer(REMOVE);
+		theCom.sendObject(theData.getTool(((MainWindow) theView).getSelectedIndex()));
+	}
+	
+	private void change() {
+		theCom.sendToServer(CHANGE);
+		theData.getTool(((MainWindow) theView).getSelectedIndex()).reduceQuant(((MainWindow) theView).getChangeInput());
+		theCom.sendObject(theData.getTool(((MainWindow) theView).getSelectedIndex()));
+	}
+	
+	private void quant() {
+		
+//		theCom.sendToServer(QUANT);
+//		
+//		setTools();
+		
+		((MainWindow) theView).setDisplay(theData.quantInfoString());
 	}
 	
 	private void displayFullInfo() {
 		((MainWindow) theView).setDisplay(theData.fullInfoString());
+	}
+	
+	private void setTools() {
+		theData.setTools(theCom.recieveObject());
 	}
 	
 	public static void main(String[] args) {

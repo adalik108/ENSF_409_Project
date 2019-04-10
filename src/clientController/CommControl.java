@@ -138,15 +138,25 @@ public class CommControl implements ToolShopCommunication{
 		}
 	}
 	
-//	public void sendObject(Tool t) {
-//		try {
-//			//objectOut.writeObject(t);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	/**
+	 * Sends the given Tool to the server as a serialized object
+	 * @param t the ArrayList of Tool to be sent to the server as a serialized object
+	 */
+	public void sendObject(Tool t) {
+		try {
+			OutputStream outputStream = theSocket.getOutputStream();
+			ObjectOutputStream objectOut = new ObjectOutputStream(outputStream);
+			objectOut.writeObject(t);
+//			System.out.println("Tools sent to client: ");
+//			printTools(t);
+			t = new Tool(0, null, 0, 0, 0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//System.out.println(t);
+		
+	}
 	
 	void flush() {
 		

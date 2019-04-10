@@ -148,6 +148,10 @@ public class Tool implements Serializable{
 		return supId;
 	}
 	
+	public void reduceQuant(int q) {
+		quant -= q;
+	}
+	
 	/**
 	 * Returns a String representation of the Tool.
 	 */

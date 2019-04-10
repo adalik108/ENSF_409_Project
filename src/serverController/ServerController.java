@@ -35,6 +35,14 @@ public class ServerController implements ToolShopTasks{
 		theCom.sendObject(theModel.search(theCom.receiveFromClient()));
 	}
 	
+	private void remove() {
+		theModel.removeTool(theCom.recieveObject());
+	}
+	
+	private void change() {
+		theModel.change(theCom.recieveObject());
+	}
+	
 	/**
 	 * Controls which operation is performed by the server
 	 */
@@ -51,6 +59,14 @@ public class ServerController implements ToolShopTasks{
 					case ALL:
 						allTools();
 						break;
+						
+					case REMOVE:
+						remove();
+						break;
+						
+					case CHANGE:
+						change();
+						break;
 				}
 			}
 		}catch(Exception e) {
@@ -58,17 +74,17 @@ public class ServerController implements ToolShopTasks{
 		}
 	}
 	
-	String[] parseSearch(String s) {
-		String [] s1 = {"", ""};
-		
-		for(int i = 0, j = 0; i < s.length(); i++) {
-			if(s.charAt(i) != '\n')
-				s1[j] += s.charAt(i);
-			else
-				j++;
-		}
-		return s1;
-	}
+//	String[] parseSearch(String s) {
+//		String [] s1 = {"", ""};
+//		
+//		for(int i = 0, j = 0; i < s.length(); i++) {
+//			if(s.charAt(i) != '\n')
+//				s1[j] += s.charAt(i);
+//			else
+//				j++;
+//		}
+//		return s1;
+//	}
 	
 	public static void main(String[] args) {
 		

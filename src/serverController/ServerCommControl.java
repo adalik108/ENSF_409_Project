@@ -87,19 +87,31 @@ public class ServerCommControl implements ToolShopCommunication {
 		}
 	}
 	
-//	public Tool recieveObject() {
-//		try {
-//			return (Tool) objectIn.readObject();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return null;
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+	/**
+	 * Receives a serialized object from the server and converts it to a Tool
+	 * @return Tool that represents the object received from the server
+	 */
+	public Tool recieveObject() {
+		try {
+			InputStream inputStream = theSocket.getInputStream();
+			ObjectInputStream objectIn = new ObjectInputStream(inputStream);
+			
+			Tool tool = (Tool) objectIn.readObject();
+			//objectIn.close();
+			
+			return tool;
+			//return (ArrayList<Tool>) objectIn.readObject();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 //	public void sendObject(Tool t) {
 //		try {
@@ -114,8 +126,8 @@ public class ServerCommControl implements ToolShopCommunication {
 //		
 //	}
 	/**
-	 * Sends the given ArrayList of Tool to the server as a serialized object
-	 * @param t the ArrayList of Tool to be sent to the server as a serialized object
+	 * Sends the given ArrayList of Tool to the client as a serialized object
+	 * @param t the ArrayList of Tool to be sent to the client as a serialized object
 	 */
 	public void sendObject(ArrayList<Tool> t) {
 		try {
