@@ -86,22 +86,43 @@ public class CommControl implements ToolShopCommunication{
 	 * @return String that represents the object received from the server
 	 */
 	public String receiveFromServer() {
+//		try {
+//			String read = "";
+//			String temp = "";
+//			
+//			while(true) {
+//				temp = socketIn.readLine();
+//				if(temp.contains(END)) {
+//					temp.replace(END, "");
+//					read += temp;
+//					return read;
+//				}
+//				read += temp;
+//			}
+//		}catch(IOException e) {
+//			e.printStackTrace();
+//			//add error message
+//			return null;
+//		}
 		try {
-			String read = "";
-			String temp = "";
+			String s = "";
+			InputStream inputStream = theSocket.getInputStream();
+			ObjectInputStream objectIn = new ObjectInputStream(inputStream);
 			
-			while(true) {
-				temp = socketIn.readLine();
-				if(temp.contains(END)) {
-					temp.replace(END, "");
-					read += temp;
-					return read;
-				}
-				read += temp;
-			}
-		}catch(IOException e) {
+			s = (String) objectIn.readObject();
+			//objectIn.close();
+			System.out.println("received: " + s);
+			return s;
+			//s = (String) obje
+//			int a = Integer.parseInt(socketIn.readLine());
+//			return a;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			//add error message
+			return null;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
 		}
 	}

@@ -2,7 +2,7 @@ package clientController;
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import clientModel.ClientData;
 import model.Tool;
@@ -104,13 +104,17 @@ public class MainWindowController extends GUIController implements ToolShopTasks
 		theCom.sendToServer(CHANGE);
 		theData.getTool(((MainWindow) theView).getSelectedIndex()).reduceQuant(((MainWindow) theView).getChangeInput());
 		theCom.sendObject(theData.getTool(((MainWindow) theView).getSelectedIndex()));
+		String s = theCom.receiveFromServer();
+		if(!s.equals("ok")) {
+			JOptionPane.showMessageDialog(theView, "Invalid Quantity!", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void quant() {
 		
-//		theCom.sendToServer(QUANT);
-//		
-//		setTools();
+		theCom.sendToServer(QUANT);
+		
+		setTools();
 		
 		((MainWindow) theView).setDisplay(theData.quantInfoString());
 	}

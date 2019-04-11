@@ -146,6 +146,25 @@ public class ServerCommControl implements ToolShopCommunication {
 	}
 	
 	/**
+	 * Sends the given String to the client as a serialized object
+	 * @param s the String to be sent to the client as a serialized object
+	 */
+	public void sendToClient(String s) {
+		try {
+			OutputStream outputStream = theSocket.getOutputStream();
+			ObjectOutputStream objectOut = new ObjectOutputStream(outputStream);
+			objectOut.writeObject(s);
+			s = new String();
+			
+			//outputStream.close();
+			//objectOut.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Closes all the input and output streams
 	 */
 	public void close() {

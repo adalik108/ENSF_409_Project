@@ -346,16 +346,16 @@ public class ToolModel {
 		return arr;
 	}
 	
-	public void change(Tool t) {
+	public boolean change(Tool t) {
 		System.out.println("Quantity is: " + t.getQuant());
 		Tool tool = searchTool(t.getName());
 		if(tool != null) {
 			int numSold = tool.getQuant() - t.getQuant();
 			if(numSold > 0) {
-				sellTool(t.getName(), numSold);
+				return sellTool(t.getName(), numSold);
 			}
 		}
-		
+		return false;
 	}
 }
 

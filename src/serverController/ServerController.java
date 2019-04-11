@@ -40,7 +40,11 @@ public class ServerController implements ToolShopTasks{
 	}
 	
 	private void change() {
-		theModel.change(theCom.recieveObject());
+		if(theModel.change(theCom.recieveObject())) {
+			theCom.sendToClient("ok");
+		}
+		else
+			theCom.sendToClient("no");
 	}
 	
 	private void add() {
@@ -74,6 +78,10 @@ public class ServerController implements ToolShopTasks{
 						
 					case ADD:
 						add();
+						break;
+						
+					case QUANT:
+						allTools();
 						break;
 				}
 			}
