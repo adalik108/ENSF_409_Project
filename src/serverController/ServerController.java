@@ -10,7 +10,7 @@ import view.MainWindow;
  *
  */
 
-public class ServerController implements ToolShopTasks{
+public class ServerController implements Runnable, ToolShopTasks{
 
 	private ToolModel theModel;
 	private ServerCommControl theCom;
@@ -54,7 +54,7 @@ public class ServerController implements ToolShopTasks{
 	/**
 	 * Controls which operation is performed by the server
 	 */
-	public void controlServer() {
+	synchronized public void controlServer() {
 		System.out.println("In controlServer");
 		try {
 			while(true) {
@@ -102,7 +102,15 @@ public class ServerController implements ToolShopTasks{
 //		return s1;
 //	}
 	
+	@Override
+	public void run() {
+		controlServer();
+		
+	}
+	
 	public static void main(String[] args) {
 		
 	}
+
+	
 }
